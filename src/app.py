@@ -38,6 +38,45 @@ activities = {
         "schedule": "Mondays, Wednesdays, Fridays, 2:00 PM - 3:00 PM",
         "max_participants": 30,
         "participants": ["john@mergington.edu", "olivia@mergington.edu"]
+    },
+    # New sports activities
+    "Soccer": {
+        "description": "Training and soccer matches for all levels",
+        "schedule": "Tuesdays and Thursdays, 4:00 PM - 5:30 PM",
+        "max_participants": 22,
+        "participants": []
+    },
+    "Swimming": {
+        "description": "Swimming lessons and training for competitions",
+        "schedule": "Mondays and Wednesdays, 5:00 PM - 6:00 PM",
+        "max_participants": 15,
+        "participants": []
+    },
+    # New artistic activities
+    "Painting": {
+        "description": "Painting workshop and various artistic techniques",
+        "schedule": "Fridays, 4:00 PM - 6:00 PM",
+        "max_participants": 10,
+        "participants": []
+    },
+    "Theater": {
+        "description": "School theater group: acting and play production",
+        "schedule": "Wednesdays, 3:30 PM - 5:30 PM",
+        "max_participants": 18,
+        "participants": []
+    },
+    # New intellectual activities
+    "Debate Club": {
+        "description": "Development of argumentation skills and competitive debate",
+        "schedule": "Thursdays, 3:30 PM - 5:00 PM",
+        "max_participants": 16,
+        "participants": []
+    },
+    "Math Olympiad": {
+        "description": "Preparation and participation in math olympiads",
+        "schedule": "Saturdays, 10:00 AM - 12:00 PM",
+        "max_participants": 25,
+        "participants": []
     }
 }
 
@@ -61,6 +100,10 @@ def signup_for_activity(activity_name: str, email: str):
 
     # Get the specific activity
     activity = activities[activity_name]
+
+    # Check if student already signed up
+    if email in activity["participants"]:
+        raise HTTPException(status_code=400, detail="Student already signed up for this activity")
 
     # Add student
     activity["participants"].append(email)
